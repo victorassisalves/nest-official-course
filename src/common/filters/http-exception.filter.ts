@@ -25,13 +25,9 @@ export class HttpExceptionFilter<T extends HttpException> implements ExceptionFi
       method: request.method,
       path: request.path,
     };
-    const error =
-      typeof response === 'string'
-        ? { message: exceptionResponse }
-        : (exceptionResponse as object)
+
     response.status(status).json({
       ...body,
-      ...error,
       status,
     });
   }
