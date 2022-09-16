@@ -6,8 +6,11 @@ export class CoffeeEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  // @Column()
+  // name: string; // Renamed to title to test migration.
+
   @Column()
-  name: string;
+  title: string;
 
   @Column()
   brand: string;

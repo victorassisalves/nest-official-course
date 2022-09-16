@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
+@Index(['name', 'type']) // Add this colums to index for database search. This speeds up search for the wanted value
 @Entity('event')
 export class EventEntity {
   @PrimaryGeneratedColumn()
