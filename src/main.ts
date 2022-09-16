@@ -9,6 +9,9 @@ async function bootstrap() {
       transform: true,
       whitelist: true, // Removes Non whitelist properties from the request before the service
       forbidNonWhitelisted: true, // Blocks the request if have Non whitelist properties
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
   await app.listen(3000);
