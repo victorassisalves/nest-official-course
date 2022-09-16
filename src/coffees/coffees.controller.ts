@@ -1,9 +1,52 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  NotFoundException,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
+import { CoffeesService } from './coffees.service';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Controller('coffees')
 export class CoffeesController {
+  constructor(private readonly cofeeServices: CoffeesService) { }
   @Get()
-  finAll() {
-    return 'Your coffe is here!';
+  finAll(@Query() pagQuery) {
+    return this.cofeeServices.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    // findOne(@Param() param) -> param.id
+    const coffee = this.cofeeServices.findOne(id);
+    if (!coffee) {
+      throw new NotFoundException(`Coffee #${id} not found!`);
+    }
+    return coffee;
+  }
+
+  @Post()
+  create(@Body() createCoffeeDto: CreateCoffeeDto) {
+    return this.cofeeServices.create(createCoffeeDto);
+  }
+
+  // @Put need the whole body object
+  // @Patch can have just the needed property
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
+    return this.cofeeServices.update(id, updateCoffeeDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.cofeeServices.remove(id);
   }
 }
