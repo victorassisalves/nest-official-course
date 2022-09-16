@@ -1,5 +1,11 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { FlavorEntity } from "./flavor.entity";
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { FlavorEntity } from './flavor.entity';
 
 @Entity('coffee')
 export class CoffeeEntity {
@@ -7,10 +13,13 @@ export class CoffeeEntity {
   id: number;
 
   // @Column()
-  // name: string; // Renamed to title to test migration.
+  // name: string;
+
+  @Column({ nullable: true })
+  description: string;
 
   @Column()
-  title: string;
+  title: string; // Renamed to test migration.
 
   @Column()
   brand: string;

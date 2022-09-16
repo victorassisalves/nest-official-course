@@ -12,5 +12,6 @@ import { FlavorEntity } from './entities/flavor.entity';
   ], // forFeature() to register entities
   controllers: [CoffeesController],
   providers: [CoffeesService],
+  exports: [CoffeesService],
 })
 export class CoffeesModule { }
